@@ -1,0 +1,120 @@
+840 Magic Squares In Grid  - 9/8/24 (medium)
+# 
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/d7070b05-4550-42ff-9ab9-d8900d80267d/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/33b3d7fd-0b9a-4ae8-89f5-3ee427941b92/Untitled.png)
+
+3x3 magic grid is one when sum of all diagonal , rows and columsn is same then we call it magic grid.
+
+to find magic grid in any grid the formula is
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/abb203db-575e-4282-9320-125fd6031e14/Untitled.png)
+
+```jsx
+coulmn = cols-3
+rows = rows-3 //  becuase 3x3 magic grid
+```
+
+how the code works
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/5bb99fa2-f634-4b11-af71-a3f0dfdc0c33/Untitled.png)
+
+**now how to write code for IsMagicGrid**
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/5f74ae35-08df-4a4f-a9f0-d801349d31b2/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/295322ed-322b-48be-98d0-8565e970fb77/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/b0d14b60-c2ce-4994-ba51-90fdf0579d2c/Untitled.png)
+
+3x3 must contian
+
+distinct 1 to 9 number
+
+no duplicate
+
+we will use unordered set <int> st;
+
+---
+
+**finding distinct number**
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/6613b097-0921-44bb-8a7f-ebaf52a99d32/Untitled.png)
+
+***now to find sum of rows , column, and diagonal and anti diagonal***
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/16471cd5-7a34-4562-9e59-c2eed7931890/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/1f600efc-4a76-4a88-8497-95f0f4018e96/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/3911f6ef-3bc3-4a33-b3d8-4fedf8f37d68/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/259a8645-34fe-4ab2-a2bb-e37dd3a6e8f4/fd1ca9cf-33fe-4612-a246-069e1c0f43c3/Untitled.png)
+
+[]()
+
+## **code:**
+
+```
+class Solution {
+public:
+
+    bool isMagicGrid(vector<vector<int>>& grid,int r,int c){
+        unordered_set<int> st;
+        for(int i=0;i<3;i++){
+            for(int j =0 ; j<3 ; j++){
+                int num = grid[r+i][c+j];
+                if(num<1||num>9||st.count(num)){
+                    return false;
+                }
+                else{
+                    st.insert(num);
+                }
+            }
+        }
+
+        int sum = grid[r][c]+grid[r][c+1]+grid[r][c+2];
+        for(int i=0;i<3;i++){
+
+            //rows
+            if(grid[r+i][c]+grid[r+i][c+1]+grid[r+i][c+2]!=sum){
+                return false;
+            }
+
+            //cols
+            if(grid[r][c+i]+grid[r+1][c+i]+grid[r+2][c+i]!=sum){
+                return false;
+            }
+
+        }
+
+        //diagonal
+        if(grid[r][c]+grid[r+1][c+1]+grid[r+2][c+2]!=sum){
+            return false;
+        
+        }
+        //Antidiagonal
+        if(grid[r][c+2]+grid[r+1][c+1]+grid[r+2][c]!=sum){
+            return false;
+        
+        }
+        return true;
+
+    }
+
+    int numMagicSquaresInside(vector<vector<int>>& grid) {
+        int rows = grid.size();
+        int cols = grid.size();
+        int count = 0;
+        for(int i=0;i<=rows-3;i++){
+            for(int j=0;j<=cols-3;j++){
+                if(isMagicGrid(grid,i,j)){
+                    count++;
+                }
+            }
+        }
+        return count;        
+    }
+};
+```
