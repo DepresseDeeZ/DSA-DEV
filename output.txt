@@ -1,5 +1,9 @@
-enter the size of an array enter the elements of an arrayenter the number of element you want to see enter the numbersnumber 1 appears 2 times 
- enter the numbersnumber 2 appears 2 times 
- enter the numbersnumber 3 appears 1 times 
- enter the numbersnumber 4 appears 0 times 
- enter the numbersnumber 5 appears 0 times 
+d->1
+c->1
+b->2
+a->2
+character a appears 2 times
+character b appears 2 times
+character c appears 1 times
+character d appears 1 times
+character e appears 0 times
