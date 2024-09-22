@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build and run C++",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "\"${file}\"",  // Wrapping the file path in quotes
+                "-o",
+                "\"${fileDirname}/${fileBasenameNoExtension}.exe\""  // Wrapping the output path in quotes
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false  // Not the default task
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compile and run C++ code."
+        },
+        {
+            "label": "run C++ with input/output redirection",
+            "type": "shell",
+            "dependsOn": "build and run C++",
+            "command": "cmd.exe /c \"\"${fileDirname}/${fileBasenameNoExtension}.exe\" < \"C:input.txt\" > \"C:output.txt\"\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true  // Set this task as the default
+            },
+            "problemMatcher": []
+        }
+    ]
+}
