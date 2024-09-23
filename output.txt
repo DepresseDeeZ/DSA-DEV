@@ -1,9 +1,1 @@
-d->1
-c->1
-b->2
-a->2
-character a appears 2 times
-character b appears 2 times
-character c appears 1 times
-character d appears 1 times
-character e appears 0 times
+1 1 2 2 3 4 4 5 6 
